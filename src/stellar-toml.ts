@@ -1,53 +1,53 @@
-import { Horizon, StellarToml } from "@stellar/stellar-sdk"
-import { debug } from "./logger"
+import { type Horizon, StellarToml } from "@stellar/stellar-sdk";
+import { debug } from "./logger";
 
 export interface WebauthData {
-  domain: string
-  endpointURL: string
-  signingKey: string | null
+	domain: string;
+	endpointURL: string;
+	signingKey: string | null;
 }
 
 interface StellarTomlData {
-  [key: string]: any
+	[key: string]: any;
 }
 
 export function getServiceSigningKey(
-  stellarTomlData: StellarTomlData
+	stellarTomlData: StellarTomlData,
 ): string | null {
-  return stellarTomlData.SIGNING_KEY || null
+	return stellarTomlData.SIGNING_KEY || null;
 }
 
 export function getWebAuthEndpointURL(
-  stellarTomlData: StellarTomlData
+	stellarTomlData: StellarTomlData,
 ): string | null {
-  return stellarTomlData.WEB_AUTH_ENDPOINT || null
+	return stellarTomlData.WEB_AUTH_ENDPOINT || null;
 }
 
 export async function fetchWebAuthData(
-  horizon: Horizon.Server,
-  issuerAccountID: string
+	horizon: Horizon.Server,
+	issuerAccountID: string,
 ): Promise<WebauthData | null> {
-  const account = await horizon.loadAccount(issuerAccountID)
-  const domain = (account as any).home_domain
+	const account = await horizon.loadAccount(issuerAccountID);
+	const domain = (account as any).home_domain;
 
-  if (!domain) {
-    debug(
-      `Web auth endpoint cannot be located. Issuing account has no home_domain: ${issuerAccountID}`
-    )
-    return null
-  }
+	if (!domain) {
+		debug(
+			`Web auth endpoint cannot be located. Issuing account has no home_domain: ${issuerAccountID}`,
+		);
+		return null;
+	}
 
-  const stellarTomlData = await StellarToml.Resolver.resolve(domain)
-  const endpointURL = getWebAuthEndpointURL(stellarTomlData)
-  const signingKey = getServiceSigningKey(stellarTomlData)
+	const stellarTomlData = await StellarToml.Resolver.resolve(domain);
+	const endpointURL = getWebAuthEndpointURL(stellarTomlData);
+	const signingKey = getServiceSigningKey(stellarTomlData);
 
-  if (!endpointURL || !signingKey) {
-    return null
-  }
+	if (!endpointURL || !signingKey) {
+		return null;
+	}
 
-  return {
-    domain,
-    endpointURL,
-    signingKey
-  }
+	return {
+		domain,
+		endpointURL,
+		signingKey,
+	};
 }

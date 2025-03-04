@@ -1,3 +1,3 @@
-import createDebugLogger from "debug"
+import createDebugLogger from "debug";
 
-export const debug = createDebugLogger("sep-10")
+export const debug = createDebugLogger("sep-10");
