@@ -75,7 +75,7 @@ function getNonceOperation(challenge: Transaction): Buffer {
 			operation.type === "manageData",
 	)[0];
 
-	if (!nonceOperation) {
+	if (!nonceOperation || !nonceOperation.value) {
 		throw Error("Challange does not contain a manage_data operation");
 	}
 

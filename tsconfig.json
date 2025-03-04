@@ -2,12 +2,14 @@
 	"compilerOptions": {
 		"allowSyntheticDefaultImports": true,
 		"esModuleInterop": true,
-		"target": "es5",
+		"skipLibCheck": true,
+		"target": "ES5",
 		"module": "commonjs",
 		"lib": ["es2015"],
 		"outDir": "dist",
 		"declaration": true,
 		"strict": true
 	},
-	"include": ["./src/index.ts"]
+	"include": ["src", "tests"],
+	"exclude": ["node_modules"]
 }
