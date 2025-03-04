@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios"
-import { Keypair, Networks, Operation, Transaction } from "stellar-sdk"
+import { Keypair, Networks, Operation, Transaction } from "@stellar/stellar-sdk"
 import { debug } from "./logger"
 
 function assertChallengeOK(
@@ -90,7 +90,7 @@ export async function fetchChallenge(
     response = await axios(endpointURL, {
       params: { account: localPublicKey }
     })
-  } catch (error) {
+  } catch (error: any) {
     debug(`Fetching web auth challenge from ${endpointURL} failed:`, error)
     throw Error(`Cannot fetch web auth challenge: ${error.message}`)
   }
@@ -123,7 +123,7 @@ export async function postResponse(
       },
       data
     })
-  } catch (error) {
+  } catch (error: any) {
     debug(`Authentication at ${endpointURL} failed:`, error)
     throw Object.assign(Error(`Web authentication failed: ${error.message}`), {
       response: error.response

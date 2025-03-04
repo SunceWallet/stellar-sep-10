@@ -1,4 +1,4 @@
-import { Server, StellarTomlResolver } from "stellar-sdk"
+import { Horizon, StellarToml } from "@stellar/stellar-sdk"
 import { debug } from "./logger"
 
 export interface WebauthData {
@@ -24,7 +24,7 @@ export function getWebAuthEndpointURL(
 }
 
 export async function fetchWebAuthData(
-  horizon: Server,
+  horizon: Horizon.Server,
   issuerAccountID: string
 ): Promise<WebauthData | null> {
   const account = await horizon.loadAccount(issuerAccountID)
@@ -37,7 +37,7 @@ export async function fetchWebAuthData(
     return null
   }
 
-  const stellarTomlData = await StellarTomlResolver.resolve(domain)
+  const stellarTomlData = await StellarToml.Resolver.resolve(domain)
   const endpointURL = getWebAuthEndpointURL(stellarTomlData)
   const signingKey = getServiceSigningKey(stellarTomlData)
 

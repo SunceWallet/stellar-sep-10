@@ -18,7 +18,7 @@ yarn add @satoshipay/stellar-sep-10
 
 ```ts
 // Look up the stellar.toml for an issuing account, parse it, return data
-import { Server } from "stellar-sdk"
+import { Server } from "@stellar/stellar-sdk"
 import { fetchWebAuthData } from "@satoshipay/stellar-sep-10"
 
 const horizon = new Server("https://stellar-horizon.satoshipay.io/")
@@ -48,7 +48,7 @@ const signingKey = getServiceSigningKey(stellarToml)
 ### Authenticate - The simple way
 
 ```ts
-import { Keypair } from "stellar-sdk"
+import { Keypair } from "@stellar/stellar-sdk"
 import { authenticate } from "@satoshipay/stellar-sep-10"
 
 // see above how to obtain `webauth`
@@ -71,7 +71,7 @@ Authorization: Bearer ${jwt}
 ### Authenticate - The manual way
 
 ```ts
-import { Keypair } from "stellar-sdk"
+import { Keypair } from "@stellar/stellar-sdk"
 import { authenticate } from "@satoshipay/stellar-sep-10"
 
 // see above how to obtain `webauth`
