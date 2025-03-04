@@ -9,7 +9,7 @@
     "build": "tsc",
     "format": "biome check src/",
     "precommit": "lint-staged",
-    "prepare": "npm run build",
+    "prepare": "husky",
     "test": "uvu -r tsm test",
     "test:ci": "uvu -r tsm test",
     "posttest": "npm run format"
