@@ -1,6 +1,6 @@
 {
 	"name": "@suncewallet/stellar-sep-10",
-	"version": "0.0.0",
+	"version": "1.0.0",
 	"author": "SatoshiPay Ltd (https://satoshipay.io/)",
 	"license": "MIT",
 	"main": "dist/index.js",
